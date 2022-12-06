@@ -1,0 +1,16 @@
+name: Integrate KubeScore
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: docker pull zegl/kube-score:latest-kustomize
+    steps:
+      - name: checkout
+        run: actions/checkout@v2
+      - name: piraces/kube-score-ga@v0.1.3
+        with:
+          manifests-folders: ./pod.yaml
