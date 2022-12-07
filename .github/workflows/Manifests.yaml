@@ -12,4 +12,4 @@ jobs:
       - name: kube-score check
         uses: piraces/kube-score-ga@v0.1.3
         with:
-          manifests-folders: ./pod.yaml
+          manifests-folders: ./pod1.yaml
