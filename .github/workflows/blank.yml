@@ -28,4 +28,4 @@ jobs:
          to: sivaprasad.p@cloudifyops.com
          from: github-action@gamil.com
          body: Kube-Score Pipeline ${{github.repository}} completed successfully!
-         attachments: '**/*.txt'
+         attachments: '**/kube-score.txt'
