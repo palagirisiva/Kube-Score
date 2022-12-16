@@ -14,7 +14,7 @@ jobs:
       - name: kube-score check
         uses: piraces/kube-score-ga@v0.1.3
         with:
-          manifests-folders: ./fixed-score-reco.yaml > kube-score.txt
+          manifests-folders: ./fixed-score-reco.yaml 
       - name: Send email
         id: email
         uses: dawidd6/action-send-mail@v3.7.1
