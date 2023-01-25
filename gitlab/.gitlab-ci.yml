@@ -1,0 +1,12 @@
+stages:
+  - Integrate-KubeScore-with-GitLab
+kubescore:
+  stage: Integrate-KubeScore-with-GitLab
+  image:
+    name: zegl/kube-score:v1.14.0-kustomize
+  script:
+    - kube-score score ../manifests/score-recommendations.yaml > kube-Score-logs.txt
+  artifacts:
+    when: always
+    paths: 
+      - kube-Score-logs.txt
