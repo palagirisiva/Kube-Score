@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+    stages {
+        stage ('SCM Checkout') {
+            steps {
+              git branch: 'main', credentialsId: 'clops_gitlab_daaf_cred', url: 'https://gitlab.cloudifyops.com/devops-toolset/clops-kubescore'
+            }
+        }
+        stage ('Integrate Kube-Score') {
+            steps {
+            sh 'docker pull zegl/kube-score:latest-kustomize'
+            sh '''docker run -v $(pwd):/project zegl/kube-score:latest score manifests/*.yaml >Kube-score-logs.txt''' 
+## For Doing Static Anlysis of multiple yaml's at a time use the command: "docker run -v $(pwd):/project zegl/kube-score:latest score manifests/*.yaml "
+            }
+        }
+    }
+post {
+    always { 
+    emailext attachmentsPattern: '**/Kube-score-logs.txt', body: 'The Logs of the Kube-Score are stored in the Logs.txt', subject: 'Kube-Score Logs file', to: 'sivaprasad.p@cloudifyops.com'
+        }
+    }
+}
